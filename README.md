@@ -4,10 +4,8 @@
 
 `$ npm install react-native-flurry-ads --save`
 
-### Add dependencies for Android
-`compile 'com.flurry.android:analytics:8.2.0@aar'`
-
-`compile 'com.flurry.android:ads:8.2.0@aar'`
+## Link
+`$ react-native link react-native-flurry-ads`
 
 ### Add dependencies for iOS Pod
 `pod 'Flurry-iOS-SDK/FlurrySDK'`
@@ -17,12 +15,3 @@
 ### Mostly automatic installation
 
 `$ react-native link react-native-flurry-ads`
-
-## Usage
-```javascript
-import RNFlurryAds from 'react-native-flurry-ads';
-
-// TODO: What to do with the module?
-RNFlurryAds;
-```
-  
