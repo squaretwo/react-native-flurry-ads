@@ -1,0 +1,5 @@
+node_modules
+/testapp
+android/build
+ios/build
+.idea

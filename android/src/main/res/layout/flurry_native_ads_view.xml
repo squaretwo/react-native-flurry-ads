@@ -1,0 +1,56 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adContainerLayout"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@android:color/white" android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+
+        <View
+            android:id="@+id/headerLine"
+            android:layout_width="match_parent" android:layout_height="2dp" android:layout_alignParentTop="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            layout_alignParentRight="true" />
+
+            <TextView
+                android:id="@+id/newsCategory"
+                android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/holo_blue_bright" android:textSize="20sp"  android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/sponsoredImage"
+                android:layout_toRightOf="@id/newsCategory"  android:layout_width="15dp" android:layout_height="15dp" />
+
+            <TextView
+                android:id="@+id/sponsoredPublisher"
+                android:layout_toRightOf="@id/sponsoredImage" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adLayout"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/mainImage"
+            android:layout_width="match_parent" android:layout_height="100dp" android:layout_weight="2" />
+
+        <LinearLayout
+            android:id="@+id/mainText"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"  android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/newsTitle"
+                android:layout_width="wrap_content"  android:layout_height="wrap_content" android:lines="2" android:paddingBottom="6dp" />
+
+            <TextView
+                android:id="@+id/newsSummary"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:lines="3" android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
