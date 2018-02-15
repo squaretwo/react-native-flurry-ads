@@ -11,7 +11,7 @@ import com.flurry.android.ads.FlurryAdNative;
 public class RNFlurryAdNativeTrackingViewManager extends SimpleViewManager<ReactViewGroup> {
     private static final String kLogTag = "RCTFlurryTrackingView";
     private static final String REACT_CLASS = "RCTFlurryNativeAdsTrackingView";
-
+    
     @ReactProp(name = "adSpaceName")
     public void setTrackingView(ReactViewGroup view, String adSpaceName) {
         if (RNFlurryAdsPackage.adsMap.containsKey(adSpaceName)) {
@@ -22,14 +22,15 @@ public class RNFlurryAdNativeTrackingViewManager extends SimpleViewManager<React
             Log.i(kLogTag, "onAppExit ");
         }
     }
-
+    
     @Override
     public ReactViewGroup createViewInstance(ThemedReactContext context) {
         return new ReactViewGroup(context);
     }
-
+    
     @Override
     public String getName() {
         return REACT_CLASS;
     }
 }
+
