@@ -18,7 +18,7 @@ import java.util.List;
 public class RNFlurryAdsPackage implements ReactPackage {
     
     public static HashMap<String, FlurryAdNative> adsMap = new HashMap<>();
-    public static HashMap<String, ReactNativeFlurryAdNativeListener> listenersMap = new HashMap<>();
+    public static HashMap<String, RNFlurryAdNativeModule.ReactNativeFlurryAdNativeListener> listenersMap = new HashMap<>();
     
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
