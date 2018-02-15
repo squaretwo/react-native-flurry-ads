@@ -24,7 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libRNFlurryAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNFlurryAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libRNFlurryAds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNFlurryAds.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFlurryAdNativeDelegate.m; sourceTree = "<group>"; };
 		DC9FDEB020356A0400DAD2DE /* RNFlurryAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFlurryAds.m; sourceTree = "<group>"; };
 		DC9FDEB120356A0400DAD2DE /* RNFlurryAdNativeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFlurryAdNativeDelegate.h; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libRNFlurryAnalytics.a */,
+				134814201AA4EA6300B7C361 /* libRNFlurryAds.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,9 +64,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* RNFlurryAnalytics */ = {
+		58B511DA1A9E6C8500147676 /* RNFlurryAds */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNFlurryAnalytics" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNFlurryAds" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -76,9 +76,9 @@
 			);
 			dependencies = (
 			);
-			name = RNFlurryAnalytics;
+			name = RNFlurryAds;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libRNFlurryAnalytics.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libRNFlurryAds.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -107,7 +107,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* RNFlurryAnalytics */,
+				58B511DA1A9E6C8500147676 /* RNFlurryAds */,
 			);
 		};
 /* End PBXProject section */
@@ -211,7 +211,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNFlurryAnalytics;
+				PRODUCT_NAME = RNFlurryAds;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -228,7 +228,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNFlurryAnalytics;
+				PRODUCT_NAME = RNFlurryAds;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -245,7 +245,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNFlurryAnalytics" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNFlurryAds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
