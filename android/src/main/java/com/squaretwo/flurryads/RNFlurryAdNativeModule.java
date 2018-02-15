@@ -23,7 +23,7 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initAd(String adSpaceName, String placeHolder, Callback fetchedCallback, Callback errorCallback) {
+    public void initAd(String adSpaceName, Callback fetchedCallback, Callback errorCallback) {
         FlurryAdNative flurryAdNative = null;
         if (RNFlurryAdsPackage.adsMap.containsKey(adSpaceName)) {
             flurryAdNative = RNFlurryAdsPackage.adsMap.get(adSpaceName);
