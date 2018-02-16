@@ -13,33 +13,35 @@
 
 @implementation RNFlurryAdNativeDelegate
 
-- (id) initWithAdSpaceName: (NSString *) adSpaceName
-        andOnClickCallback: (RCTResponseSenderBlock)onClickCallback
-        andFetchedCallback: (RCTResponseSenderBlock)fetchedCallback
-          andErrorCallback: (RCTResponseSenderBlock)errorCallback {
-    if ( self = [super init] ) {
-        self._onClickCallback = onClickCallback;
-        self._fetchedCallback = fetchedCallback;
-        self._errorCallback = errorCallback;
-    }
+- (id) initWithAdSpaceName: (NSString *) adSpaceName {
     return self;
 }
 
 - (void) adNativeDidFetchAd:(FlurryAdNative*)nativeAd
 {
     NSLog(@"Native Ad for Space [%@] Received Ad with [%lu] assets", nativeAd.space, (unsigned long)nativeAd.assetList.count);
-    
+    NSMutableDictionary* data = [NSMutableDictionary dictionary];
+    for (int i = 0 ; i< nativeAd.assetList.count; i++) {
+        FlurryAdNativeAsset *asset = (FlurryAdNativeAsset *)nativeAd.assetList[i];
+        data[asset.name] = asset.value;
+    }
+    self._fetchedCallback(@[data]);
 }
 
 - (void) adNative:(FlurryAdNative*)nativeAd
           adError:(FlurryAdError)adError
  errorDescription:(NSError*) errorDescription
 {
-    self._errorCallback(@[[NSNull null], [NSNumber numberWithInt:adError], [NSNumber numberWithInt:errorDescription.code]]);
+    if (self._errorCallback != nil) {
+        self._errorCallback(@[[NSNumber numberWithInt:adError], [NSNumber numberWithInt:errorDescription.code]]);
+    }
 }
 
 - (void) adNativeDidReceiveClick:(FlurryAdNative*) nativeAd
 {
-    self._onClickCallback(@[[NSNull null]]);
+    if (self._onClickCallback != nil) {
+        self._onClickCallback(@[[NSNull null]]);
+    }
+
 }
 @end

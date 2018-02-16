@@ -17,10 +17,7 @@
 @property RCTResponseSenderBlock _fetchedCallback;
 @property RCTResponseSenderBlock _errorCallback;
 
-- (id) initWithAdSpaceName: (NSString *) adSpaceName
-        andOnClickCallback: (RCTResponseSenderBlock)onClickCallback
-        andFetchedCallback: (RCTResponseSenderBlock)fetchedCallback
-          andErrorCallback: (RCTResponseSenderBlock)errorCallback;
+- (id) initWithAdSpaceName: (NSString *) adSpaceName;
 @end
 
 

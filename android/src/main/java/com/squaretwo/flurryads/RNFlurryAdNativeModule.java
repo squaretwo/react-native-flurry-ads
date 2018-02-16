@@ -10,7 +10,10 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.flurry.android.ads.FlurryAdErrorType;
 import com.flurry.android.ads.FlurryAdNative;
+import com.flurry.android.ads.FlurryAdNativeAsset;
 import com.flurry.android.ads.FlurryAdNativeListener;
+
+import java.util.List;
 
 public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
     private static final String kLogTag = "RNFlurryAdNativeModule";
@@ -85,13 +88,10 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         public void onFetched(FlurryAdNative flurryAdNative) {
             Log.i(kLogTag, "onFetched ");
             WritableMap data = Arguments.createMap();
-            data.putString("headline", flurryAdNative.getAsset("headline").getValue());
-            data.putString("summary", flurryAdNative.getAsset("summary").getValue());
-            data.putString("source", flurryAdNative.getAsset("source").getValue());
-            data.putString("secHqBrandingLogo", flurryAdNative.getAsset("secHqBrandingLogo").getValue());
-            data.putString("secHqImage", flurryAdNative.getAsset("secHqImage").getValue());
-
-
+            List<FlurryAdNativeAsset> list = flurryAdNative.getAssetList();
+            for (int i = 0; i < list.size(); i++) {
+                data.putString(list.get(i).getName(),list.get(i).getValue());
+            }
             fetchedCallback.invoke(data);
         }
 

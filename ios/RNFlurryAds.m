@@ -7,10 +7,8 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName
-                  callbacks:(NSArray *)callbacks) {
-    RCTResponseSenderBlock onClickedCallback = (RCTResponseSenderBlock)callbacks[0];
-    RCTResponseSenderBlock fetchedCallback = (RCTResponseSenderBlock)callbacks[1];
-    RCTResponseSenderBlock errorCallback = (RCTResponseSenderBlock)callbacks[2];
+                  fetchedCallback:(RCTResponseSenderBlock)fetchedCallback
+                  errorCallback:(RCTResponseSenderBlock)errorCallback) {
     if (dictionary == nil) {
         dictionary = [NSMutableDictionary dictionary];
     }
@@ -24,10 +22,20 @@ RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName
         nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
         dictionary[adSpaceName] = nativeAd;
     }
-    
-    RNFlurryAdNativeDelegate *delegate = [[RNFlurryAdNativeDelegate alloc] initWithAdSpaceName:adSpaceName andOnClickCallback:onClickedCallback andFetchedCallback:fetchedCallback andErrorCallback:errorCallback];
+
+    RNFlurryAdNativeDelegate *delegate = [[RNFlurryAdNativeDelegate alloc] init];
+    delegate._errorCallback = errorCallback;
+    delegate._fetchedCallback = fetchedCallback;
     nativeAd.adDelegate = delegate;
     listenerdictionary[adSpaceName] = delegate;
+}
+
+RCT_EXPORT_METHOD(setOnClick:(NSString *)adSpaceName
+           onClickedCallback:(RCTResponseSenderBlock)callback) {
+    if (listenerdictionary[adSpaceName] != nil) {
+        RNFlurryAdNativeDelegate *listener = (RNFlurryAdNativeDelegate *)listenerdictionary[adSpaceName];
+        listener._onClickCallback = callback;
+    }
 }
 
 RCT_EXPORT_METHOD(fetchAd:(NSString *)adSpaceName) {
@@ -46,6 +54,4 @@ RCT_EXPORT_METHOD(destroyAd:(NSString *)adSpaceName) {
     }
 }
 
-
 @end
-
