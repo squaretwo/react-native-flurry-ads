@@ -30,7 +30,7 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initAd(String adSpaceName, Callback fetchedCallback, Callback errorCallback) {
+    public void initAd(String adSpaceName, Callback fetchedCallback) {
         FlurryAdNative flurryAdNative = null;
         if (RNFlurryAdsPackage.adsMap.containsKey(adSpaceName)) {
             flurryAdNative = RNFlurryAdsPackage.adsMap.get(adSpaceName);
@@ -40,11 +40,25 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         }
         ReactNativeFlurryAdNativeListener listener = new ReactNativeFlurryAdNativeListener();
         listener.fetchedCallback = fetchedCallback;
-        listener.errorCallback = errorCallback;
+        listener.errorCallback = new OnErrorListener() {
+            @Override
+            public void onError(String adSpaceName, int errorType, int errorCode) {
+                WritableMap map = Arguments.createMap();
+                map.putString("adSpaceName", adSpaceName);
+                map.putInt("errorType", errorType);
+                map.putInt("errorCode", errorCode);
+
+                reactContext
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("EventError", map);
+            }
+        };
         listener.onClickedCallback = new OnClickListener() {
             @Override
             public void onClick(String adSpaceName) {
-                sendEvent(reactContext, adSpaceName);
+                reactContext
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("EventClickAd", adSpaceName);
             }
         };
         RNFlurryAdsPackage.listenersMap.put(adSpaceName, listener);
@@ -72,14 +86,6 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         }
     }
 
-    private void sendEvent(ReactContext reactContext,
-                           String adSpaceName) {
-        reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit("EventClickAd", adSpaceName);
-    }
-
-
     @Override
     public String getName() {
         return "RNFlurryAds";
@@ -89,11 +95,15 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         void onClick(String adSpaceName);
     }
 
+    interface OnErrorListener {
+        void onError(String adSpaceName, int erroType, int errorCode);
+    }
+
     class ReactNativeFlurryAdNativeListener implements FlurryAdNativeListener {
 
         public Callback fetchedCallback = null;
         public OnClickListener onClickedCallback = null;
-        public Callback errorCallback = null;
+        public OnErrorListener errorCallback = null;
 
         public ReactNativeFlurryAdNativeListener() {
 
@@ -150,7 +160,7 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         public void onError(FlurryAdNative flurryAdNative, FlurryAdErrorType flurryAdErrorType, int errorCode) {
             if (flurryAdErrorType.equals(FlurryAdErrorType.FETCH)) {
                 Log.i(kLogTag, "onFetchFailed " + errorCode);
-                errorCallback.invoke(flurryAdErrorType, errorCode);
+                errorCallback.onError(flurryAdNative.getAdSpace(),flurryAdErrorType.ordinal(), errorCode);
             }
         }
     }

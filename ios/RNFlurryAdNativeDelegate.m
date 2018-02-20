@@ -33,7 +33,7 @@
  errorDescription:(NSError*) errorDescription
 {
     if (self._errorCallback != nil) {
-        self._errorCallback(@[[NSNumber numberWithInt:adError], [NSNumber numberWithInt:errorDescription.code]]);
+        self._errorCallback(nativeAd.space, [NSNumber numberWithInt:adError], [NSNumber numberWithInt:errorDescription.code]);
     }
 }
 

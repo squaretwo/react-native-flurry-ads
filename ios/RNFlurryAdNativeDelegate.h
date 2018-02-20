@@ -14,8 +14,8 @@
 @interface RNFlurryAdNativeDelegate : NSObject <FlurryAdNativeDelegate>
 
 @property (nonatomic, copy) void (^_onClickCallback)(NSString*);
+@property (nonatomic, copy) void (^_errorCallback)(NSString*,NSNumber*,NSNumber*);
 @property RCTResponseSenderBlock _fetchedCallback;
-@property RCTResponseSenderBlock _errorCallback;
 
 - (id) initWithAdSpaceName: (NSString *) adSpaceName;
 @end
