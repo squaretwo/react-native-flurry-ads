@@ -25,13 +25,8 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName
                   fetchedCallback:(RCTResponseSenderBlock)fetchedCallback) {
-    FlurryAdNative *nativeAd = nil;
-    if (RNFlurryAds.dictionary[adSpaceName] != nil) {
-        nativeAd = RNFlurryAds.dictionary[adSpaceName];
-    } else {
-        nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
-        RNFlurryAds.dictionary[adSpaceName] = nativeAd;
-    }
+    FlurryAdNative *nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
+    RNFlurryAds.dictionary[adSpaceName] = nativeAd;
 
     RNFlurryAdNativeDelegate *delegate = [[RNFlurryAdNativeDelegate alloc] init];
     delegate._fetchedCallback = fetchedCallback;
