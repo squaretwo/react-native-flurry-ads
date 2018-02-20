@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC014BDB203BA8290079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC014BDA203BA8290079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m */; };
 		DC9FDEB320356A0400DAD2DE /* RNFlurryAdNativeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */; };
 		DC9FDEB420356A0400DAD2DE /* RNFlurryAds.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9FDEB020356A0400DAD2DE /* RNFlurryAds.m */; };
 /* End PBXBuildFile section */
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNFlurryAds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNFlurryAds.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC014BDA203BA8290079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTFlurryNativeAdsTrackingViewManager.m; sourceTree = "<group>"; };
 		DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFlurryAdNativeDelegate.m; sourceTree = "<group>"; };
 		DC9FDEB020356A0400DAD2DE /* RNFlurryAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFlurryAds.m; sourceTree = "<group>"; };
 		DC9FDEB120356A0400DAD2DE /* RNFlurryAdNativeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFlurryAdNativeDelegate.h; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				DC014BDA203BA8290079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m */,
 				DC9FDEB120356A0400DAD2DE /* RNFlurryAdNativeDelegate.h */,
 				DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */,
 				DC9FDEB220356A0400DAD2DE /* RNFlurryAds.h */,
@@ -117,6 +120,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC014BDB203BA8290079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m in Sources */,
 				DC9FDEB420356A0400DAD2DE /* RNFlurryAds.m in Sources */,
 				DC9FDEB320356A0400DAD2DE /* RNFlurryAdNativeDelegate.m in Sources */,
 			);
