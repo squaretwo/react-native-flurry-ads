@@ -40,7 +40,7 @@
 - (void) adNativeDidReceiveClick:(FlurryAdNative*) nativeAd
 {
     if (self._onClickCallback != nil) {
-        self._onClickCallback(@[[NSNull null]]);
+        self._onClickCallback(nativeAd.space);
     }
 
 }

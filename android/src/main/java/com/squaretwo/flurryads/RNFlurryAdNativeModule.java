@@ -1,13 +1,17 @@
 package com.squaretwo.flurryads;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.flurry.android.ads.FlurryAdErrorType;
 import com.flurry.android.ads.FlurryAdNative;
 import com.flurry.android.ads.FlurryAdNativeAsset;
@@ -37,15 +41,14 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         ReactNativeFlurryAdNativeListener listener = new ReactNativeFlurryAdNativeListener();
         listener.fetchedCallback = fetchedCallback;
         listener.errorCallback = errorCallback;
+        listener.onClickedCallback = new OnClickListener() {
+            @Override
+            public void onClick(String adSpaceName) {
+                sendEvent(reactContext, adSpaceName);
+            }
+        };
         RNFlurryAdsPackage.listenersMap.put(adSpaceName, listener);
         flurryAdNative.setListener(listener);
-    }
-
-    @ReactMethod
-    public void setOnClick(String adSpaceName, Callback onClickedCallback) {
-        if (RNFlurryAdsPackage.listenersMap.containsKey(adSpaceName)) {
-            RNFlurryAdsPackage.listenersMap.get(adSpaceName).onClickedCallback = onClickedCallback;
-        }
     }
 
     @ReactMethod
@@ -64,8 +67,16 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
             RNFlurryAdsPackage.adsMap.remove(adSpaceName);
         }
         if (RNFlurryAdsPackage.listenersMap.containsKey(adSpaceName)) {
+            RNFlurryAdsPackage.listenersMap.get(adSpaceName).onClickedCallback = null;
             RNFlurryAdsPackage.listenersMap.remove(adSpaceName);
         }
+    }
+
+    private void sendEvent(ReactContext reactContext,
+                           String adSpaceName) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("EventClickAd", adSpaceName);
     }
 
 
@@ -74,10 +85,14 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         return "RNFlurryAds";
     }
 
+    interface OnClickListener {
+        void onClick(String adSpaceName);
+    }
+
     class ReactNativeFlurryAdNativeListener implements FlurryAdNativeListener {
 
         public Callback fetchedCallback = null;
-        public Callback onClickedCallback = null;
+        public OnClickListener onClickedCallback = null;
         public Callback errorCallback = null;
 
         public ReactNativeFlurryAdNativeListener() {
@@ -113,7 +128,7 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         @Override
         public void onClicked(FlurryAdNative flurryAdNative) {
             Log.i(kLogTag, "onClicked ");
-            onClickedCallback.invoke();
+            onClickedCallback.onClick(flurryAdNative.getAdSpace());
         }
 
         @Override

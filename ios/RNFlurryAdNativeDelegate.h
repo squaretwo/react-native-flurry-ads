@@ -13,7 +13,7 @@
 
 @interface RNFlurryAdNativeDelegate : NSObject <FlurryAdNativeDelegate>
 
-@property RCTResponseSenderBlock _onClickCallback;
+@property (nonatomic, copy) void (^_onClickCallback)(NSString*);
 @property RCTResponseSenderBlock _fetchedCallback;
 @property RCTResponseSenderBlock _errorCallback;
 

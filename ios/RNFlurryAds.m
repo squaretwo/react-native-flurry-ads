@@ -37,16 +37,11 @@ RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName
     RNFlurryAdNativeDelegate *delegate = [[RNFlurryAdNativeDelegate alloc] init];
     delegate._errorCallback = errorCallback;
     delegate._fetchedCallback = fetchedCallback;
+    delegate._onClickCallback = ^(NSString* space){
+        [self sendEventWithName:@"EventClickAd" body:space];
+    };
     nativeAd.adDelegate = delegate;
     RNFlurryAds.listenerdictionary[adSpaceName] = delegate;
-}
-
-RCT_EXPORT_METHOD(setOnClick:(NSString *)adSpaceName
-           onClickedCallback:(RCTResponseSenderBlock)callback) {
-    if (RNFlurryAds.listenerdictionary[adSpaceName] != nil) {
-        RNFlurryAdNativeDelegate *listener = (RNFlurryAdNativeDelegate *)RNFlurryAds.listenerdictionary[adSpaceName];
-        listener._onClickCallback = callback;
-    }
 }
 
 RCT_EXPORT_METHOD(fetchAd:(NSString *)adSpaceName) {
@@ -65,4 +60,8 @@ RCT_EXPORT_METHOD(destroyAd:(NSString *)adSpaceName) {
     }
 }
 
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[@"EventClickAd"];
+}
 @end

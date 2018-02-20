@@ -1,6 +1,7 @@
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-@interface RNFlurryAds : NSObject <RCTBridgeModule>
+@interface RNFlurryAds : RCTEventEmitter <RCTBridgeModule>
 + (NSMutableDictionary *) dictionary;
 + (NSMutableDictionary *) listenerdictionary;
 @end
