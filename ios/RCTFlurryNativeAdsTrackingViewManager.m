@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #import <React/RCTViewManager.h>
-#import "RNFlurryAds.h"
-#import <FlurryAdNative.h>
+#import "RCTFlurryNativeAdsTrackingVIewManager.h"
+#import "FlurryAdNative.h"
 
 @interface RCTFlurryNativeAdsTrackingViewManager : RCTViewManager
 @end
@@ -20,8 +20,8 @@
 RCT_EXPORT_MODULE()
 
 RCT_CUSTOM_VIEW_PROPERTY(adSpaceName, NSString*, UIView)
-{
-    FlurryAdNative *nativeAd =(FlurryAdNative *)[dictionary objectForKey:json];
+{    
+    FlurryAdNative *nativeAd =(FlurryAdNative *)[RNFlurryAds.dictionary objectForKey:json];
     [nativeAd removeTrackingView];
     nativeAd.trackingView = view;
 }
