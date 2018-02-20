@@ -1,10 +1,15 @@
-import { NativeModules } from 'react-native';
+import { NativeEventEmitter, NativeModules } from 'react-native';
 import FlurryNativeAdsTrackingView from './FlurryNativeAdsTrackingView';
 
 class FlurryAds {
-  static initAd(adSpaceName, onClickedCallback, fetchedCallback, errorCallback) {
+  static clickEventCallbacks = {};
+
+  static initAd(adSpaceName, fetchedCallback, errorCallback) {
     NativeModules.RNFlurryAds.initAd(adSpaceName,fetchedCallback, errorCallback);
-    NativeModules.RNFlurryAds.setOnClick(adSpaceName, onClickedCallback);
+  }
+
+  static setOnClick(adSpaceName, onClick) {
+    FlurryAds.clickEventCallbacks[adSpaceName] = onClick;
   }
 
   static fetchAd(adSpaceName) {
@@ -13,7 +18,19 @@ class FlurryAds {
 
   static destroyAd(adSpaceName) {
     NativeModules.FlurryAds.destroyAd(adSpaceName);
+    FlurryAds.clickEventCallbacks[adSpaceName] = undefined;
   }
 }
+
+const flurryAdEmitter = new NativeEventEmitter(NativeModules.RNFlurryAds);
+
+const subscription = flurryAdEmitter.addListener(
+  'EventClickAd',
+  (adSpaceName) => {
+      if(FlurryAds.clickEventCallbacks[adSpaceName]) {
+        FlurryAds.clickEventCallbacks[adSpaceName]();
+      }
+  }
+);
 
 module.exports = { FlurryAds, FlurryNativeAdsTrackingView };
