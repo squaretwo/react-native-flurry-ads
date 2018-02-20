@@ -31,13 +31,8 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void initAd(String adSpaceName, Callback fetchedCallback) {
-        FlurryAdNative flurryAdNative = null;
-        if (RNFlurryAdsPackage.adsMap.containsKey(adSpaceName)) {
-            flurryAdNative = RNFlurryAdsPackage.adsMap.get(adSpaceName);
-        } else {
-            flurryAdNative = new FlurryAdNative(this.reactContext, adSpaceName);
-            RNFlurryAdsPackage.adsMap.put(adSpaceName, flurryAdNative);
-        }
+        FlurryAdNative flurryAdNative = new FlurryAdNative(this.reactContext, adSpaceName);
+        RNFlurryAdsPackage.adsMap.put(adSpaceName, flurryAdNative);
         ReactNativeFlurryAdNativeListener listener = new ReactNativeFlurryAdNativeListener();
         listener.fetchedCallback = fetchedCallback;
         listener.errorCallback = new OnErrorListener() {
