@@ -19,7 +19,7 @@ class FlurryAds {
   }
 
   static destroyAd(adSpaceName) {
-    NativeModules.FlurryAds.destroyAd(adSpaceName);
+    NativeModules.RNFlurryAds.destroyAd(adSpaceName);
     FlurryAds.clickEventCallbacks[adSpaceName] = undefined;
     FlurryAds.errorCallbacks[adSpaceName] = undefined;
   }
