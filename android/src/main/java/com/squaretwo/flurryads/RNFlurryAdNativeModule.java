@@ -30,11 +30,22 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initAd(String adSpaceName, Callback fetchedCallback) {
+    public void initAd(String adSpaceName) {
         FlurryAdNative flurryAdNative = new FlurryAdNative(this.reactContext, adSpaceName);
         RNFlurryAdsPackage.adsMap.put(adSpaceName, flurryAdNative);
         ReactNativeFlurryAdNativeListener listener = new ReactNativeFlurryAdNativeListener();
-        listener.fetchedCallback = fetchedCallback;
+        listener.fetchedCallback = new OnFetchListener() {
+            @Override
+            public void onFetch(String adSpaceName, WritableMap adData) {
+                WritableMap map = Arguments.createMap();
+                map.putString("adSpaceName", adSpaceName);
+                map.putMap("adData", adData);
+
+                reactContext
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("EventFetch", map);
+            }
+        };
         listener.errorCallback = new OnErrorListener() {
             @Override
             public void onError(String adSpaceName, int errorType, int errorCode) {
@@ -86,6 +97,10 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
         return "RNFlurryAds";
     }
 
+    interface OnFetchListener {
+        void onFetch(String adSpaceName, WritableMap map);
+    }
+
     interface OnClickListener {
         void onClick(String adSpaceName);
     }
@@ -96,7 +111,7 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
 
     class ReactNativeFlurryAdNativeListener implements FlurryAdNativeListener {
 
-        public Callback fetchedCallback = null;
+        public OnFetchListener fetchedCallback = null;
         public OnClickListener onClickedCallback = null;
         public OnErrorListener errorCallback = null;
 
@@ -112,7 +127,7 @@ public class RNFlurryAdNativeModule extends ReactContextBaseJavaModule {
             for (int i = 0; i < list.size(); i++) {
                 data.putString(list.get(i).getName(),list.get(i).getValue());
             }
-            fetchedCallback.invoke(data);
+            fetchedCallback.onFetch(flurryAdNative.getAdSpace(), data);
         }
 
         @Override

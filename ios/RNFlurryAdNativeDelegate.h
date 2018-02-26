@@ -15,7 +15,7 @@
 
 @property (nonatomic, copy) void (^_onClickCallback)(NSString*);
 @property (nonatomic, copy) void (^_errorCallback)(NSString*,NSNumber*,NSNumber*);
-@property RCTResponseSenderBlock _fetchedCallback;
+@property (nonatomic, copy) void (^_fetchedCallback)(NSString*,NSMutableDictionary*);
 
 - (id) initWithAdSpaceName: (NSString *) adSpaceName;
 @end

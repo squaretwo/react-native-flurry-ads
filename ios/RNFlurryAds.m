@@ -23,13 +23,14 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName
-                  fetchedCallback:(RCTResponseSenderBlock)fetchedCallback) {
+RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName) {
     FlurryAdNative *nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
     RNFlurryAds.dictionary[adSpaceName] = nativeAd;
 
     RNFlurryAdNativeDelegate *delegate = [[RNFlurryAdNativeDelegate alloc] init];
-    delegate._fetchedCallback = fetchedCallback;
+    delegate._fetchedCallback = ^(NSString* space, NSMutableDictionary* adData){
+        [self sendEventWithName:@"EventFetch" body:@{@"adSpaceName": space, @"adData": adData}];
+    };
     delegate._errorCallback = ^(NSString* space, NSNumber* errorType, NSNumber* errorCode){
         [self sendEventWithName:@"EventError" body:@{@"adSpaceName": space, @"errorType": errorType, @"errorCode": errorCode}];
     };
@@ -58,6 +59,6 @@ RCT_EXPORT_METHOD(destroyAd:(NSString *)adSpaceName) {
 
 - (NSArray<NSString *> *)supportedEvents
 {
-    return @[@"EventClickAd",@"EventError"];
+    return @[@"EventClickAd",@"EventError",@"EventFetch"];
 }
 @end

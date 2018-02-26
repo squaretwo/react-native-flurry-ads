@@ -25,7 +25,9 @@
         FlurryAdNativeAsset *asset = (FlurryAdNativeAsset *)nativeAd.assetList[i];
         data[asset.name] = asset.value;
     }
-    self._fetchedCallback(@[data]);
+    if (self._fetchedCallback != nil) {
+        self._fetchedCallback(nativeAd.space, data);
+    }
 }
 
 - (void) adNative:(FlurryAdNative*)nativeAd
