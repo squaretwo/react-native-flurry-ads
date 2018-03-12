@@ -4,6 +4,7 @@
 @interface RNFlurryAds : RCTEventEmitter <RCTBridgeModule>
 + (NSMutableDictionary *) dictionary;
 + (NSMutableDictionary *) listenerdictionary;
++ (UIViewController *) currentViewController;
 @end
 
 

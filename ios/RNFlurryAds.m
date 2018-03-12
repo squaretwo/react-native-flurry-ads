@@ -21,10 +21,21 @@
     return listenerdictionary;
 }
 
++ (UIViewController *) currentViewController {
+    UIViewController *topVC = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    while((topVC.presentedViewController) != nil){
+        topVC = topVC.presentedViewController;
+    }
+    return topVC;
+
+}
+
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(initAd:(NSString *)adSpaceName) {
     FlurryAdNative *nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
+    nativeAd.viewControllerForPresentation = RNFlurryAds.currentViewController;
+
     RNFlurryAds.dictionary[adSpaceName] = nativeAd;
 
     RNFlurryAdNativeDelegate *delegate = [[RNFlurryAdNativeDelegate alloc] init];
