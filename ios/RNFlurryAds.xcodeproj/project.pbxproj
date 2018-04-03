@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC014BEA203BAFCB0079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC014BE9203BAFCB0079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m */; };
-		DC9FDEB320356A0400DAD2DE /* RNFlurryAdNativeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */; };
-		DC9FDEB420356A0400DAD2DE /* RNFlurryAds.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9FDEB020356A0400DAD2DE /* RNFlurryAds.m */; };
+		DC014BEA203BAFCB0079CEB1 /* RCTFlurryAdViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC014BE9203BAFCB0079CEB1 /* RCTFlurryAdViewManager.m */; };
+		DCC19CAF206EDA87009DA90C /* RCTFlurryAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC19CAE206EDA87009DA90C /* RCTFlurryAdView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,12 +25,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNFlurryAds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNFlurryAds.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC014BE9203BAFCB0079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTFlurryNativeAdsTrackingViewManager.m; sourceTree = "<group>"; };
-		DC014BEB203BB07A0079CEB1 /* RCTFlurryNativeAdsTrackingVIewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFlurryNativeAdsTrackingVIewManager.h; sourceTree = "<group>"; };
-		DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFlurryAdNativeDelegate.m; sourceTree = "<group>"; };
-		DC9FDEB020356A0400DAD2DE /* RNFlurryAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFlurryAds.m; sourceTree = "<group>"; };
-		DC9FDEB120356A0400DAD2DE /* RNFlurryAdNativeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFlurryAdNativeDelegate.h; sourceTree = "<group>"; };
-		DC9FDEB220356A0400DAD2DE /* RNFlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFlurryAds.h; sourceTree = "<group>"; };
+		DC014BE9203BAFCB0079CEB1 /* RCTFlurryAdViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTFlurryAdViewManager.m; sourceTree = "<group>"; };
+		DC014BEB203BB07A0079CEB1 /* RCTFlurryAdViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFlurryAdViewManager.h; sourceTree = "<group>"; };
+		DCC19CAD206EDA7C009DA90C /* RCTFlurryAdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFlurryAdView.h; sourceTree = "<group>"; };
+		DCC19CAE206EDA87009DA90C /* RCTFlurryAdView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTFlurryAdView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +53,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				DC9FDEB120356A0400DAD2DE /* RNFlurryAdNativeDelegate.h */,
-				DC9FDEAF20356A0400DAD2DE /* RNFlurryAdNativeDelegate.m */,
-				DC9FDEB220356A0400DAD2DE /* RNFlurryAds.h */,
-				DC9FDEB020356A0400DAD2DE /* RNFlurryAds.m */,
-				DC014BEB203BB07A0079CEB1 /* RCTFlurryNativeAdsTrackingVIewManager.h */,
-				DC014BE9203BAFCB0079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m */,
+				DCC19CAD206EDA7C009DA90C /* RCTFlurryAdView.h */,
+				DCC19CAE206EDA87009DA90C /* RCTFlurryAdView.m */,
+				DC014BEB203BB07A0079CEB1 /* RCTFlurryAdViewManager.h */,
+				DC014BE9203BAFCB0079CEB1 /* RCTFlurryAdViewManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,6 +92,7 @@
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -122,9 +118,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC9FDEB420356A0400DAD2DE /* RNFlurryAds.m in Sources */,
-				DC014BEA203BAFCB0079CEB1 /* RCTFlurryNativeAdsTrackingViewManager.m in Sources */,
-				DC9FDEB320356A0400DAD2DE /* RNFlurryAdNativeDelegate.m in Sources */,
+				DC014BEA203BAFCB0079CEB1 /* RCTFlurryAdViewManager.m in Sources */,
+				DCC19CAF206EDA87009DA90C /* RCTFlurryAdView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +203,7 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/Pods/Flurry-iOS-SDK/**";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -215,16 +211,21 @@
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(PROJECT_DIR)/../../../ios/Pods/Flurry-iOS-SDK/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNFlurryAds;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNFlurryAds-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/Pods/Flurry-iOS-SDK/**";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -232,10 +233,13 @@
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(PROJECT_DIR)/../../../ios/Pods/Flurry-iOS-SDK/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNFlurryAds;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNFlurryAds-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
