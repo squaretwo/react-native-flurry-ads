@@ -10,9 +10,11 @@ class FlurryAdView extends PureComponent {
     this._onFetchSuccess = this._onFetchSuccess.bind(this);
     this._onFetchError = this._onFetchError.bind(this);
     this._onReceivedClick = this._onReceivedClick.bind(this);
+    this.fetched = false;
   }
 
   refresh = () => {
+    this.fetched = false;
     this.setState({adData:null});
     UIManager.dispatchViewManagerCommand(
       ReactNative.findNodeHandle(this.flurryAdViewInstance),
@@ -29,6 +31,7 @@ class FlurryAdView extends PureComponent {
   }
 
   _onFetchSuccess(event: Event) {
+    this.fetched = true;
     this.setState({adData:event.nativeEvent.adData})
     if (!this.props.onFetchSuccess) {
       return;
