@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FlurryAdNativeDelegate.h"
 #import "RCTFlurryAdView.h"
 #import <React/RCTEventDispatcher.h>
 
 @implementation RCTFlurryAdView
+@synthesize nativeAd;
 RCTEventDispatcher *_eventDispatcher;
-@synthesize nativeAd = _nativeAd;
 
 + (UIViewController *) currentViewController {
     UIViewController *topVC = [[[UIApplication sharedApplication] keyWindow] rootViewController];
@@ -31,14 +31,10 @@ RCTEventDispatcher *_eventDispatcher;
     return self;
 }
 
-- (void) initFlurryAd {
-    if (self.nativeAd != nil) {
-        return;
-    }
-    self.nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
-    self.nativeAd.adDelegate = self;
-    self.nativeAd.viewControllerForPresentation = RCTFlurryAdView.currentViewController;
-    self.nativeAd.trackingView = self;
+- (FlurryAdNative*) initializeFlurryAd:(NSString*) adSapceName{
+    FlurryAdNative *nativeAd = [[FlurryAdNative alloc] initWithSpace:adSpaceName];
+    nativeAd.viewControllerForPresentation = RCTFlurryAdView.currentViewController;
+    return nativeAd;
 }
 
 - (void) setAdSpaceName:(NSString *)newAdSpaceName {
@@ -53,13 +49,18 @@ RCTEventDispatcher *_eventDispatcher;
     return adSpaceName;
 }
 
-
-- (void) initAndFetchAd {
-    self.nativeAd = nil;
-    [self initFlurryAd];
-    [self.nativeAd fetchAd];
+- (void) refresh {
+    [self initAndFetchAd];
 }
 
+- (void) initAndFetchAd {
+    FlurryAdNative *flurryAd = [self initializeFlurryAd:adSpaceName];
+    flurryAd.adDelegate = self;
+    self.nativeAd = flurryAd;
+    [flurryAd fetchAd];
+}
+
+#pragma mark - FlurryAdNativeDelegate delegates
 - (void) adNativeDidFetchAd:(FlurryAdNative*) nativeAd
 {
     NSLog(@"Native Ad for Space [%@] Received Ad with [%lu] assets", nativeAd.space, (unsigned long)nativeAd.assetList.count);
@@ -71,9 +72,11 @@ RCTEventDispatcher *_eventDispatcher;
         FlurryAdNativeAsset *asset = (FlurryAdNativeAsset *)nativeAd.assetList[i];
         data[asset.name] = asset.value;
     }
+    [nativeAd removeTrackingView];
+    nativeAd.trackingView = self;
     self.onFetchSuccess(@{
           @"adSpaceName": nativeAd.space,
-          @"data": data,
+          @"adData": data,
       });
 }
 
@@ -90,15 +93,9 @@ RCTEventDispatcher *_eventDispatcher;
 
 - (void) adNativeDidReceiveClick:(FlurryAdNative*) nativeAd
 {
-    self.onReceviedClick(@{
+    self.onReceivedClick(@{
           @"adSpaceName": nativeAd.space,
           });
-}
-
-- (void)removeFromSuperview
-{
-    self.nativeAd = nil;
-    [super removeFromSuperview];
 }
 
 @end

@@ -15,15 +15,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class RNFlurryAdsPackage implements ReactPackage {
-    
-    public static HashMap<String, FlurryAdNative> adsMap = new HashMap<>();
-    public static HashMap<String, RNFlurryAdNativeModule.ReactNativeFlurryAdNativeListener> listenersMap = new HashMap<>();
+public class RCTFlurryAdsPackage implements ReactPackage {
     
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        Log.d("RNFlurryAds", "Initializing RNFlurryAdsPackage");
-        return Arrays.<NativeModule>asList(new RNFlurryAdNativeModule(reactContext));
+        return Collections.emptyList();
     }
     
     @Override
@@ -33,6 +29,6 @@ public class RNFlurryAdsPackage implements ReactPackage {
     
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.<ViewManager>asList(new RNFlurryAdNativeTrackingViewManager());
+        return Arrays.<ViewManager>asList(new RCTFlurryAdViewManager());
     }
 }
