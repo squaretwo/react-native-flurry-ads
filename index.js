@@ -47,11 +47,9 @@ class FlurryAdView extends PureComponent {
   }
 
   render () {
-    const height = this.fetched ? this.props.contentStyle.height : 0;
     return(
       <RCTFlurryAdView
         {...this.props}
-        style={[this.props.contentStyle,{height: height}]}
         ref={(ref)=>{this.flurryAdViewInstance = ref}}
         onFetchSuccess={this._onFetchSuccess}
         onFetchError={this._onFetchError}
