@@ -18,12 +18,8 @@ import java.util.List;
 public class RCTFlurryAdsPackage implements ReactPackage {
 
     @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
-    }
-
-    @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(new RCTFlurryAdViewManager());
     }
+
 }
