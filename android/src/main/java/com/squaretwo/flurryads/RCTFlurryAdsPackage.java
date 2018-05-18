@@ -18,7 +18,7 @@ import java.util.List;
 public class RCTFlurryAdsPackage implements ReactPackage {
 
     @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Collections.emptyList();
     }
 
