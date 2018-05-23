@@ -10,9 +10,6 @@
   ],
   "author": "mkkang0116",
   "license": "MIT",
-  "peerDependencies": {
-    "react-native": "0.45.1"
-  },
   "dependencies": {
     "prop-types": "^15.6.1"
   }
