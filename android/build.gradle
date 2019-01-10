@@ -1,3 +1,9 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+}
+
 apply plugin: 'com.android.library'
 
 android {
@@ -13,6 +19,12 @@ android {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile 'com.flurry.android:ads:8.2.0@aar'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.flurry.android:ads:8.2.0@aar'
+    implementation('com.mopub:mopub-sdk-native-static:5.4.1@aar') {
+        transitive = true
+        exclude module: 'libAvid-mopub'
+        exclude module: 'moat-mobile-app-kit'
+    }
 }
+
