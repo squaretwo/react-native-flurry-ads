@@ -59,8 +59,8 @@ public class RCTFlurryAdViewManager extends ViewGroupManager<RCTFlurryAdView> {
     @Override
     public Map getExportedCustomBubblingEventTypeConstants() {
         return MapBuilder.builder()
+                .put("onFetchError", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onFetchError")))
                 .put("onFetchSuccess", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onFetchSuccess")))
-                .put("onFetchFailure", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onFetchFailure")))
                 .put("onReceivedClick", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onReceivedClick")))
                 .build();
     }
